@@ -1,5 +1,11 @@
-import { elements } from "./base"; // elementos da UI
-import { resPerPage } from "./../config";
+import {
+  elements
+} from "./base"; // elementos da UI
+import {
+  resPerPage as resPP
+} from "./../config";
+
+
 export const getInput = () => elements.searchInput.value; // retorna o valor inserido no campo de busca//
 
 export const clearInput = () => {
@@ -10,25 +16,22 @@ export const clearInput = () => {
 export const clearResults = () => {
   elements.searchResList.innerHTML = "";
   elements.searchResPages.innerHTML = "";
+  console.log(elements);
 };
 
 export const renderPost = post => {
   const markup = `
-        <div class="col-1-of-4">
-            <div class="card">
-                <a class="results__link" href="${post.guid.rendered}">
-                    <img src="${!post.better_featured_image
-                      ? "/src/img/logo.png"
-                      : post.better_featured_image
-                          .source_url}?resize=300%2C200" alt="${post.title
-    .rendered}" class="img-responsive">
-                </a>
-                <div class="card__body">
-                    <h4 class="results__name">${post.title.rendered}</h4>
-                    <p>${post.excerpt.rendered}</p>
-                </div>
-            </div>
+
+    <div class="card">
+        <a class="results__link card-img-top" href="${post.guid.rendered}">
+            <img src="${(!post.better_featured_image)?'/src/img/logo.png': (post.better_featured_image.source_url)}?resize=300%2C200" alt="${post.title
+            .rendered}" class="img-responsive">
+        </a>
+        <div class="card-body">
+            <h4 class="card-title results__name">${post.title.rendered}</h4>
+            <p class="card-text">${post.excerpt.rendered}</p>
         </div>
+    </div>
     `;
   elements.searchResList.insertAdjacentHTML("beforeend", markup);
 };
@@ -68,7 +71,7 @@ const renderButtons = (page, numResults, resPerPage) => {
   elements.searchResPages.insertAdjacentHTML("afterbegin", button);
 };
 
-export const renderResults = (posts, page = 1, resPerPage = 12) => {
+export const renderResults = (posts, page = 1, resPerPage = resPP) => {
   // renderiza resultado da página
   const start = (page - 1) * resPerPage;
   const end = page * resPerPage;

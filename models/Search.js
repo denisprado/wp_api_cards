@@ -1,5 +1,12 @@
 import axios from "axios";
-import { proxy, url, post_type, path, count, params } from "./../config";
+import {
+  proxy,
+  url,
+  post_type,
+  path,
+  count,
+  params
+} from "./../config";
 
 export default class Search {
   constructor(query) {
