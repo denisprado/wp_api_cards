@@ -1,10 +1,5 @@
-import {
-  elements
-} from "./base"; // elementos da UI
-import {
-  resPerPage as resPP
-} from "./../config";
-
+import { elements } from "./base"; // elementos da UI
+import { resPerPage as resPP, element_id } from "./../config";
 
 export const getInput = () => elements.searchInput.value; // retorna o valor inserido no campo de busca//
 
@@ -20,19 +15,38 @@ export const clearResults = () => {
 };
 
 export const renderPost = post => {
-  const markup = `
-
-    <div class="card">
-        <a class="results__link card-img-top" href="${post.guid.rendered}">
-            <img src="${(!post.better_featured_image)?'/src/img/logo.png': (post.better_featured_image.source_url)}?resize=300%2C200" alt="${post.title
-            .rendered}" class="img-responsive">
-        </a>
-        <div class="card-body">
-            <h4 class="card-title results__name">${post.title.rendered}</h4>
-            <p class="card-text">${post.excerpt.rendered}</p>
-        </div>
-    </div>
+  let markup;
+  if (element_id === "insta") {
+    markup = `
+            <div class="card">
+                <a class="results__link card-img-top" target="_blank" href="${post.link}">
+                    <figure class="results__fig">
+                        <img src="${post.images.standard_resolution.url}" title="${post.caption.text}" alt="${post.caption.text}" class="img-responsive">
+                    </figure>
+                </a>
+                <div class="card-body">
+                    <p class="results__caption card-text">${post.caption.text.substring(0, post.caption.text
+                        .substring(0, 144)
+                        .lastIndexOf(
+                          " "
+                        ))} (...) <a class="results__link" target="_blank" href="${post.link}">Leia tudo</a></p>
+                </div>
+            </div>
     `;
+  } else {
+    markup = `
+      <div class="card">
+          <a class="results__link card-img-top" href="${post.guid.rendered}">
+              <img src="${!post.better_featured_image ? "/src/img/logo.png"
+                : post.better_featured_image.source_url}?resize=300%2C200" alt="${post.title.rendered}" class="img-responsive">
+          </a>
+          <div class="card-body">
+              <h4 class="card-title results__name">${post.title.rendered}</h4>
+              <p class="card-text">${post.excerpt.rendered}</p>
+          </div>
+      </div>
+      `;
+  }
   elements.searchResList.insertAdjacentHTML("beforeend", markup);
 };
 
