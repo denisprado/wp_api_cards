@@ -21,15 +21,16 @@ export const renderPost = post => {
             <div class="card">
                 <a class="results__link card-img-top" target="_blank" href="${post.link}">
                     <figure class="results__fig">
-                        <img src="${post.images.standard_resolution.url}" title="${post.caption.text}" alt="${post.caption.text}" class="img-responsive">
+                        <img src="${post.images.standard_resolution
+                          .url}" title="${post.caption.text}" alt="${post
+      .caption.text}" class="img-responsive">
                     </figure>
                 </a>
                 <div class="card-body">
-                    <p class="results__caption card-text">${post.caption.text.substring(0, post.caption.text
-                        .substring(0, 144)
-                        .lastIndexOf(
-                          " "
-                        ))} (...) <a class="results__link" target="_blank" href="${post.link}">Leia tudo</a></p>
+                    <p class="results__caption card-text">${post.caption.text.substring(
+                      0,
+                      post.caption.text.substring(0, 144).lastIndexOf(" ")
+                    )} (...) <a class="results__link" target="_blank" href="${post.link}">Leia tudo</a></p>
                 </div>
             </div>
     `;
@@ -37,8 +38,11 @@ export const renderPost = post => {
     markup = `
       <div class="card">
           <a class="results__link card-img-top" href="${post.guid.rendered}">
-              <img src="${!post.better_featured_image ? "/src/img/logo.png"
-                : post.better_featured_image.source_url}?resize=300%2C200" alt="${post.title.rendered}" class="img-responsive">
+              <img src="${!post.better_featured_image
+                ? "/src/img/logo.png"
+                : post.better_featured_image
+                    .source_url}?resize=300%2C200" alt="${post.title
+      .rendered}" class="img-responsive">
           </a>
           <div class="card-body">
               <h4 class="card-title results__name">${post.title.rendered}</h4>
@@ -89,7 +93,12 @@ export const renderResults = (posts, page = 1, resPerPage = resPP) => {
   // renderiza resultado da página
   const start = (page - 1) * resPerPage;
   const end = page * resPerPage;
-  posts.slice(start, end).forEach(renderPost);
+  console.log(posts);
+  if (element_id === "insta") {
+    posts.data.slice(start, end).forEach(renderPost);
+  } else {
+    posts.slice(start, end).forEach(renderPost);
+  }
 
   // render pagination buttons
   renderButtons(page, posts.length, resPerPage);
