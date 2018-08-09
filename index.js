@@ -1,6 +1,18 @@
 import Search from "./models/Search";
 import * as searchView from "./views/searchView";
+<<<<<<< HEAD
 import { elements, renderLoader, clearLoader } from "./views/base";
+||||||| merged common ancestors
+import {
+  elements,
+  renderLoader,
+  clearLoader
+} from "./views/base";
+
+=======
+import { elements, renderLoader, clearLoader } from "./views/base";
+import { element_id } from "./config";
+>>>>>>> d0b96b966652104427f913800b9ac803e7777adf
 
 /** Global state of App //
 - Search objetct
