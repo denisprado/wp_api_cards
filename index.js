@@ -1,14 +1,9 @@
 import Search from "./models/Search";
 import * as searchView from "./views/searchView";
 
-import {
-  elements,
-  renderLoader,
-  clearLoader
-} from "./views/base";
+import { elements, renderLoader, clearLoader } from "./views/base";
 
 import { element_id } from "./config";
-
 
 /** Global state of App //
 - Search objetct

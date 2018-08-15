@@ -8,3 +8,4 @@ export const path = "blog";
 export const params = "?parent=3738";
 export const post_type = "pages";
 export const resPerPage = 6;
+export const excerpt = 100;

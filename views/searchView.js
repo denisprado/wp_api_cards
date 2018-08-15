@@ -1,5 +1,11 @@
-import { elements } from "./base"; // elementos da UI
-import { resPerPage as resPP, element_id } from "./../config";
+import {
+  elements
+} from "./base"; // elementos da UI
+import {
+  resPerPage as resPP,
+  element_id,
+  excerpt
+} from "./../config";
 
 export const getInput = () => elements.searchInput.value; // retorna o valor inserido no campo de busca//
 
@@ -14,7 +20,7 @@ export const clearResults = () => {
   console.log(elements);
 };
 
-export const renderPost = post => {
+export const renderPost = (post, excpt = excerpt) => {
   let markup;
   if (element_id === "insta") {
     markup = `
@@ -29,7 +35,7 @@ export const renderPost = post => {
                 <div class="card-body">
                     <p class="results__caption card-text">${post.caption.text.substring(
                       0,
-                      post.caption.text.substring(0, 144).lastIndexOf(" ")
+                      post.caption.text.substring(0, excpt).lastIndexOf(" ")
                     )} (...) <a class="results__link" target="_blank" href="${post.link}">Leia tudo</a></p>
                 </div>
             </div>
