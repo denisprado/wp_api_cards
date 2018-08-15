@@ -55,10 +55,10 @@ export const renderPost = (post, excerpt = 144) => {
           </a>
           <div class="card-body">
               <h4 class="card-title results__name">${post.title.rendered}</h4>
-              <p class="card-text">${post.excerpt.rendered.substring(
+              <p class="card-text">${post.content.rendered.substring(
                 0,
-                post.excerpt.rendered.substring(0, excerpt).lastIndexOf(" ")
-              )}</p>
+                post.content.rendered.substring(0, excerpt).lastIndexOf(" ")
+              )}(...) <a class="results__link" target="_blank" href="${post.guid.rendered}">Leia tudo</a></p>
           </div>
       </div>
       `;
