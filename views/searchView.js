@@ -4,7 +4,7 @@ import {
 import {
   resPerPage as resPP,
   element_id,
-  excerpt
+  excerpt as excpt
 } from "./../config";
 
 export const getInput = () => elements.searchInput.value; // retorna o valor inserido no campo de busca//
@@ -20,8 +20,11 @@ export const clearResults = () => {
   console.log(elements);
 };
 
-export const renderPost = (post, excpt = excerpt) => {
+export const renderPost = (post, excerpt = 144) => {
   let markup;
+  if (excerpt){
+    excerpt = excpt;
+  }
   if (element_id === "insta") {
     markup = `
             <div class="card">
@@ -35,11 +38,11 @@ export const renderPost = (post, excpt = excerpt) => {
                 <div class="card-body">
                     <p class="results__caption card-text">${post.caption.text.substring(
                       0,
-                      post.caption.text.substring(0, excpt).lastIndexOf(" ")
+                      post.caption.text.substring(0, excerpt).lastIndexOf(" ")
                     )} (...) <a class="results__link" target="_blank" href="${post.link}">Leia tudo</a></p>
                 </div>
             </div>
-    `;
+            `;
   } else {
     markup = `
       <div class="card">
@@ -52,7 +55,10 @@ export const renderPost = (post, excpt = excerpt) => {
           </a>
           <div class="card-body">
               <h4 class="card-title results__name">${post.title.rendered}</h4>
-              <p class="card-text">${post.excerpt.rendered}</p>
+              <p class="card-text">${post.excerpt.rendered.substring(
+                0,
+                post.excerpt.rendered.substring(0, excerpt).lastIndexOf(" ")
+              )}</p>
           </div>
       </div>
       `;
